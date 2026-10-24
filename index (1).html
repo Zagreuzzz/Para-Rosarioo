@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body{margin:0}</style>
+<title>Te amo Rosario</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap">
+<style>
+  /* Concepto: un ramo de lirios pintados a la acuarela que surge del fondo negro y se desvanece hacia abajo, con el mensaje escrito a mano debajo. Un solo look nocturno, sin tema claro. */
+  :root {
+    --bg: #000000;
+    --pink: #ff86bb;
+    --pink-soft: #ffc2dc;
+    --stem: #2f7a52;
+    --font-script: "Uncial Antiqua", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+    color-scheme: dark;
+  }
+
+  html, body { height: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--pink);
+    padding-block: 28px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stage {
+    width: min(100%, 660px);
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .garden {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .sway {
+    transform-origin: 350px 660px;
+    animation: sway 8s ease-in-out infinite alternate;
+  }
+
+  .blooms { filter: drop-shadow(0 0 16px rgba(255, 105, 165, 0.30)); }
+
+  .stem { fill: none; stroke: var(--stem); stroke-linecap: round; }
+
+  #fireflies {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .fade-from { stop-color: var(--bg); stop-opacity: 0; }
+  .fade-to { stop-color: var(--bg); stop-opacity: 1; }
+
+  .drift {
+    fill: var(--pink);
+    opacity: 0.5;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: drift 10s ease-in-out infinite alternate;
+  }
+
+  h1 {
+    margin: -2.5rem 0 0;
+    font-family: var(--font-script);
+    font-weight: 400;
+    font-size: clamp(2.1rem, 9.5vw, 4.2rem);
+    line-height: 1.2;
+    letter-spacing: 0.03em;
+    text-align: center;
+    text-wrap: balance;
+    color: var(--pink);
+    text-shadow: 0 0 28px rgba(255, 126, 182, 0.5);
+  }
+
+  @keyframes sway {
+    from { transform: rotate(-0.8deg); }
+    to { transform: rotate(0.8deg); }
+  }
+
+  @keyframes drift {
+    from { transform: translate(0, 0) rotate(0deg); }
+    to { transform: translate(16px, 62px) rotate(80deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sway, .drift { animation: none; }
+  }
+</style>
+
+<main class="stage">
+  <svg class="garden" viewBox="0 0 700 660" role="img" aria-label="Un ramo de lirios rosados pintados a la acuarela">
+    <defs>
+      <linearGradient id="pg" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="-100">
+        <stop offset="0" stop-color="#f3f0a6"/>
+        <stop offset="0.1" stop-color="#ffe5bb"/>
+        <stop offset="0.3" stop-color="#ffbdb2"/>
+        <stop offset="0.55" stop-color="#fa8aaa"/>
+        <stop offset="0.8" stop-color="#ef5f93"/>
+        <stop offset="1" stop-color="#da417d"/>
+      </linearGradient>
+      <radialGradient id="th">
+        <stop offset="0" stop-color="#8fb04a" stop-opacity="0.95"/>
+        <stop offset="0.55" stop-color="#b6c866" stop-opacity="0.5"/>
+        <stop offset="1" stop-color="#b6c866" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="bg" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0" stop-color="#2f7a52"/>
+        <stop offset="0.3" stop-color="#e98aa6"/>
+        <stop offset="1" stop-color="#ffc0d6"/>
+      </linearGradient>
+      <linearGradient id="lg" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0" stop-color="#1c4c34"/>
+        <stop offset="0.5" stop-color="#3f8a58"/>
+        <stop offset="1" stop-color="#86c67e"/>
+      </linearGradient>
+      <radialGradient id="halo">
+        <stop offset="0" stop-color="#ff5a96" stop-opacity="0.16"/>
+        <stop offset="1" stop-color="#ff5a96" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+        <stop class="fade-from" offset="0"/>
+        <stop class="fade-to" offset="1"/>
+      </linearGradient>
+
+      <filter id="paint" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="3" result="wob"/>
+        <feDisplacementMap in="SourceGraphic" in2="wob" scale="5" xChannelSelector="R" yChannelSelector="G" result="shape"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="8" result="grain"/>
+        <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0.76  0 0 0 0 0.1  0 0 0 0 0.36  0 0 0 -0.6 0.42" result="speck"/>
+        <feComposite in="speck" in2="shape" operator="in" result="pigment"/>
+        <feMerge>
+          <feMergeNode in="shape"/>
+          <feMergeNode in="pigment"/>
+        </feMerge>
+      </filter>
+      <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="2"/>
+      </filter>
+    </defs>
+
+    <ellipse cx="350" cy="250" rx="340" ry="270" fill="url(#halo)"/>
+
+    <g class="sway">
+      <g id="art"></g>
+    </g>
+
+    <g aria-hidden="true">
+      <path class="drift" d="M0,0 C-6,-6 -6,-16 0,-22 C6,-16 6,-6 0,0Z" transform="translate(36 90)" style="animation-duration:11s"/>
+      <path class="drift" d="M0,0 C-6,-6 -6,-16 0,-22 C6,-16 6,-6 0,0Z" transform="translate(664 56) scale(1.2)" style="animation-duration:9s; animation-delay:-4s"/>
+      <path class="drift" d="M0,0 C-6,-6 -6,-16 0,-22 C6,-16 6,-6 0,0Z" transform="translate(640 330) scale(0.9)" style="animation-duration:12s; animation-delay:-7s"/>
+      <path class="drift" d="M0,0 C-6,-6 -6,-16 0,-22 C6,-16 6,-6 0,0Z" transform="translate(22 300) scale(1.1)" style="animation-duration:10s; animation-delay:-2s"/>
+      <path class="drift" d="M0,0 C-6,-6 -6,-16 0,-22 C6,-16 6,-6 0,0Z" transform="translate(300 20) scale(0.8)" style="animation-duration:13s; animation-delay:-9s"/>
+    </g>
+
+    <rect x="0" y="480" width="700" height="180" fill="url(#fade)"/>
+  </svg>
+
+  <h1>te amo Rosario</h1>
+</main>
+
+<canvas id="fireflies" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      var t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  function f2(n) { return Math.round(n * 100) / 100; }
+
+  /* Pétalo en coordenadas unitarias: base en 0,0 y punta en 0,-100. W es el ancho, c la curvatura de la punta. */
+  function petalPath(W, c) {
+    var tx = c * W * 0.5;
+    return 'M0,0 C' + f2(-0.75 * W) + ',-22 ' + f2(-0.8 * W + tx * 0.3) + ',-68 ' + f2(tx) + ',-100 C' +
+      f2(0.8 * W + tx * 0.3) + ',-68 ' + f2(0.75 * W) + ',-22 0,0Z';
+  }
+
+  function petal(p, r) {
+    var tx = p.c * p.W * 0.5;
+    var d = petalPath(p.W, p.c);
+    var rib = 'M0,-6 Q' + f2(p.c * p.W * 0.12) + ',-55 ' + f2(tx * 0.9) + ',-92';
+    var s = '<g transform="rotate(' + f2(p.ang) + ') scale(1 ' + f2(p.len) + ')">';
+    s += '<path d="' + d + '" fill="url(#pg)" stroke="#c43b78" stroke-opacity="0.5" stroke-width="1.2"/>';
+    var side, v;
+    for (side = -1; side <= 1; side += 2) {
+      v = 'M0,-8 Q' + f2(side * p.W * 0.22) + ',-50 ' + f2(side * p.W * 0.28 + tx * 0.8) + ',-90';
+      s += '<path d="' + v + '" stroke="#c0427a" stroke-opacity="0.22" stroke-width="0.8" fill="none"/>';
+    }
+    s += '<path d="' + rib + '" stroke="#fff1d0" stroke-opacity="0.4" stroke-width="3.4" fill="none" stroke-linecap="round" filter="url(#soft)"/>';
+    s += '<path d="' + rib + '" stroke="#b02a64" stroke-opacity="0.35" stroke-width="0.9" fill="none"/>';
+    var n = 26 + Math.floor(r() * 10), i, t, hw, x, y;
+    for (i = 0; i < n; i++) {
+      t = 0.1 + 0.62 * Math.pow(r(), 1.2);
+      hw = 0.56 * p.W * Math.pow(Math.sin(Math.PI * t), 0.7);
+      x = (r() * 2 - 1) * hw * 0.8 + p.c * p.W * 0.5 * t * t;
+      y = -100 * t;
+      s += '<ellipse cx="' + f2(x) + '" cy="' + f2(y) + '" rx="' + f2(0.8 + r() * 1.4) + '" ry="' + f2(1.1 + r() * 1.8) +
+        '" transform="rotate(' + f2((r() - 0.5) * 50) + ' ' + f2(x) + ' ' + f2(y) + ')" fill="#7a1040" fill-opacity="' + f2(0.55 + r() * 0.35) + '"/>';
+    }
+    return s + '</g>';
+  }
+
+  function lily(cx, cy, size, rot, tilt, seed) {
+    var r = mulberry32(seed), ps = [], k, i, out = '';
+    for (k = 0; k < 6; k++) {
+      var outer = (k % 2 === 0);
+      ps.push({
+        ang: k * 60 + (r() - 0.5) * 16,
+        len: (outer ? 1 : 0.92) * (0.88 + r() * 0.2),
+        W: outer ? 31 : 41,
+        c: (r() - 0.5) * 1.8,
+        outer: outer
+      });
+    }
+    ps.sort(function (a, b) { return (b.outer ? 1 : 0) - (a.outer ? 1 : 0); });
+    for (i = 0; i < ps.length; i++) { out += petal(ps[i], r); }
+
+    out += '<circle r="17" fill="url(#th)"/>';
+
+    for (i = 0; i < 6; i++) {
+      var a = (-90 + (i - 2.5) * 20 + (r() - 0.5) * 8) * Math.PI / 180;
+      var L = 60 + r() * 16, bend = (r() - 0.5) * 16;
+      var ex = Math.cos(a) * L, ey = Math.sin(a) * L;
+      var mx = ex * 0.5 - Math.sin(a) * bend, my = ey * 0.5 + Math.cos(a) * bend;
+      var ang = Math.atan2(ey - my, ex - mx) * 180 / Math.PI;
+      out += '<path d="M0,0 Q' + f2(mx) + ',' + f2(my) + ' ' + f2(ex) + ',' + f2(ey) + '" stroke="#fff1dc" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-opacity="0.9"/>';
+      out += '<g transform="translate(' + f2(ex) + ' ' + f2(ey) + ') rotate(' + f2(ang) + ')"><ellipse rx="8" ry="2.5" fill="#6b1d19"/><ellipse rx="6" ry="1" cy="-0.6" fill="#e07a2c" fill-opacity="0.55"/></g>';
+    }
+
+    var pa = (-90 + (r() - 0.5) * 20) * Math.PI / 180, pL = 84;
+    var px = Math.cos(pa) * pL, py = Math.sin(pa) * pL;
+    out += '<path d="M0,0 Q' + f2(px * 0.4 - 6) + ',' + f2(py * 0.5) + ' ' + f2(px) + ',' + f2(py) + '" stroke="#ffe9ef" stroke-width="2.3" fill="none" stroke-linecap="round"/>';
+    out += '<circle cx="' + f2(px) + '" cy="' + f2(py) + '" r="3.6" fill="#e9f0b4"/>';
+
+    var sc = size / 100;
+    return '<g filter="url(#paint)"><g transform="translate(' + cx + ' ' + cy + ') rotate(' + rot + ') scale(' + f2(sc) + ' ' + f2(sc * tilt) + ')">' + out + '</g></g>';
+  }
+
+  function bud(x, y, ang, size) {
+    return '<g filter="url(#paint)"><g transform="translate(' + x + ' ' + y + ') rotate(' + ang + ') scale(' + size + ')">' +
+      '<path d="M0,0 C-14,-10 -17,-42 2,-80 C20,-42 14,-10 0,0Z" fill="url(#bg)" stroke="#c43b78" stroke-opacity="0.45" stroke-width="1"/>' +
+      '<path d="M0,-6 C-2,-30 0,-52 2,-72" stroke="#b02a64" stroke-opacity="0.4" stroke-width="1" fill="none"/>' +
+      '<path d="M-6,-14 C-9,-34 -6,-54 0,-70" stroke="#fff1d0" stroke-opacity="0.3" stroke-width="2" fill="none" filter="url(#soft)"/>' +
+      '</g></g>';
+  }
+
+  function leaf(x, y, ang, len, w, bend) {
+    var d = 'M0,0 C' + (-w) + ',' + f2(-len * 0.3) + ' ' + f2(-w * 0.9 + bend * 0.5) + ',' + f2(-len * 0.75) + ' ' + bend + ',' + (-len) +
+      ' C' + f2(w * 0.9 + bend * 0.5) + ',' + f2(-len * 0.7) + ' ' + w + ',' + f2(-len * 0.3) + ' 0,0Z';
+    var mid = 'M0,-2 Q' + f2(bend * 0.25) + ',' + f2(-len * 0.5) + ' ' + f2(bend * 0.97) + ',' + f2(-len * 0.96);
+    return '<g transform="translate(' + x + ' ' + y + ') rotate(' + ang + ')">' +
+      '<path d="' + d + '" fill="url(#lg)" stroke="#1c4c34" stroke-opacity="0.6" stroke-width="0.8"/>' +
+      '<path d="' + mid + '" stroke="#b6e4a6" stroke-opacity="0.45" stroke-width="1.2" fill="none"/></g>';
+  }
+
+  var art = '';
+
+  /* Tallos */
+  var stems = [
+    ['M355,205 C358,330 350,480 345,660', 6],
+    ['M150,320 C180,430 280,530 338,660', 5],
+    ['M560,300 C520,420 420,540 358,660', 5],
+    ['M215,120 C225,250 300,430 348,660', 4],
+    ['M505,115 C495,250 410,430 356,660', 4],
+    ['M255,400 C275,500 320,590 340,660', 4],
+    ['M455,395 C430,500 380,590 352,660', 4],
+    ['M70,170 C70,330 190,520 335,660', 4],
+    ['M625,150 C625,320 500,520 362,660', 4]
+  ];
+  stems.forEach(function (s) { art += '<path class="stem" d="' + s[0] + '" stroke-width="' + s[1] + '"/>'; });
+
+  /* Hojas largas que se arquean */
+  art += '<g filter="url(#paint)">';
+  [
+    [330, 560, -80, 170, 16, -52],
+    [360, 555, 82, 170, 16, 52],
+    [347, 520, -62, 200, 18, -46],
+    [350, 500, 60, 190, 17, 46],
+    [350, 440, -26, 170, 14, -22],
+    [352, 420, 28, 160, 14, 24]
+  ].forEach(function (l) { art += leaf(l[0], l[1], l[2], l[3], l[4], l[5]); });
+  art += '</g>';
+
+  /* Botones y flores */
+  art += '<g class="blooms">';
+  art += bud(70, 170, -18, 1.15);
+  art += bud(625, 150, 16, 1.05);
+  art += lily(215, 120, 92, -22, 0.85, 31);
+  art += lily(505, 115, 96, 20, 0.82, 41);
+  art += lily(150, 320, 118, -35, 0.8, 11);
+  art += lily(560, 300, 122, 30, 0.78, 23);
+  art += lily(355, 205, 150, -6, 0.86, 7);
+  art += lily(255, 405, 86, -48, 0.8, 53);
+  art += lily(455, 400, 88, 44, 0.8, 67);
+  art += '</g>';
+
+  document.getElementById('art').innerHTML = art;
+})();
+
+/* Luciérnagas */
+(function () {
+  var cv = document.getElementById('fireflies');
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext('2d');
+  var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var W = 0, H = 0, dpr = 1, flies = [];
+
+  var sprite = document.createElement('canvas');
+  sprite.width = 64; sprite.height = 64;
+  var sc = sprite.getContext('2d');
+  var g = sc.createRadialGradient(32, 32, 0, 32, 32, 32);
+  g.addColorStop(0, 'rgba(255,252,200,1)');
+  g.addColorStop(0.18, 'rgba(236,255,140,0.85)');
+  g.addColorStop(0.5, 'rgba(190,255,90,0.22)');
+  g.addColorStop(1, 'rgba(190,255,90,0)');
+  sc.fillStyle = g;
+  sc.fillRect(0, 0, 64, 64);
+
+  function spawn() {
+    return {
+      x: Math.random() * W,
+      y: Math.random() * H,
+      a: Math.random() * Math.PI * 2,
+      sp: 6 + Math.random() * 14,
+      r: 5 + Math.random() * 9,
+      ph: Math.random() * Math.PI * 2,
+      bl: 0.5 + Math.random() * 0.9
+    };
+  }
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    cv.width = Math.round(W * dpr);
+    cv.height = Math.round(H * dpr);
+    var n = Math.max(22, Math.min(60, Math.round(W * H / 26000)));
+    while (flies.length < n) { flies.push(spawn()); }
+    flies.length = n;
+  }
+
+  var last = performance.now();
+  function frame(now) {
+    var dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    for (var i = 0; i < flies.length; i++) {
+      var f = flies[i];
+      if (!reduce) {
+        f.a += Math.sin(now / 1000 * f.bl + f.ph * 3) * 0.9 * dt;
+        f.x += Math.cos(f.a) * f.sp * dt;
+        f.y += Math.sin(f.a) * f.sp * dt - 2 * dt;
+        if (f.x < -30) f.x = W + 30;
+        if (f.x > W + 30) f.x = -30;
+        if (f.y < -30) f.y = H + 30;
+        if (f.y > H + 30) f.y = -30;
+      }
+      var b = Math.pow(Math.sin(now / 1000 * f.bl * 2 + f.ph) * 0.5 + 0.5, 2.2);
+      var s = f.r * 3 * (0.75 + 0.45 * b);
+      ctx.globalAlpha = reduce ? 0.6 : 0.12 + 0.88 * b;
+      ctx.drawImage(sprite, f.x - s / 2, f.y - s / 2, s, s);
+    }
+    ctx.globalAlpha = 1;
+    if (!reduce) { requestAnimationFrame(frame); }
+  }
+
+  resize();
+  window.addEventListener('resize', function () {
+    resize();
+    if (reduce) { frame(performance.now()); }
+  });
+  requestAnimationFrame(frame);
+})();
+</script>
+
+</body>
+</html>
